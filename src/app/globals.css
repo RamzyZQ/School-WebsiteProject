@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0369a1;
+  --color-navy-deep: #0c4a6e;
+  --color-navy-soft: #0284c7;
+  --color-gold: #bae6fd;
+  --color-gold-dark: #075985;
+  --color-cream: #f8fafc;
+  --color-slate-body: #475569;
+  --color-border: #cbd5e1;
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-dm-serif);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar-explore[open] > ul {
+  animation: dropdown-enter 160ms ease-out both;
+}
+
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-slate-body);
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: var(--color-navy);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+html[data-motion="ready"] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 1.25rem, 0);
+  transition:
+    opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html[data-motion="ready"] [data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html[data-motion="ready"] [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
